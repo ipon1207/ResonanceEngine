@@ -24,5 +24,15 @@ namespace Core.Utilities
         {
             if (arg < 0) throw new ArgumentOutOfRangeException("引数が0未満です");
         }
+
+        /// <summary>
+        /// 引数が0.0以上であることを確認
+        /// </summary>
+        /// <param name="arg">メソッド・コンストラクタの引数</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static void ZeroOrMore(float arg)
+        {
+            if (arg < 0) throw new ArgumentOutOfRangeException("引数が0.0未満です");
+        }
     }
 }
