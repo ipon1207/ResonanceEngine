@@ -18,7 +18,7 @@ namespace Domains
         /// <param name="value">攻撃力</param>
         public Strength(int value)
         {
-            CheckArgument.ZeroOrMore(value);
+            CheckUtil.ZeroOrMore(value);
 
             Value = value;
         }

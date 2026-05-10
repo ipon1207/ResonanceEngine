@@ -25,9 +25,9 @@ namespace Domains
         /// <param name="agi">素早さ</param>
         public CharacterModel(HitPoint hp, Strength str, Agility agi)
         {
-            CheckArgument.NotNull(hp);
-            CheckArgument.NotNull(str);
-            CheckArgument.NotNull(agi);
+            CheckUtil.ArgNotNull(hp);
+            CheckUtil.ArgNotNull(str);
+            CheckUtil.ArgNotNull(agi);
 
             HP = hp;
             STR = str;

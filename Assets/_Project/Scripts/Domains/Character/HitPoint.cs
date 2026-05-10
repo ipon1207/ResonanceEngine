@@ -26,8 +26,8 @@ namespace Domains
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public HitPoint(int value, int maxValue)
         {
-            CheckArgument.ZeroOrMore(value);
-            CheckArgument.ZeroOrMore(maxValue);
+            CheckUtil.ZeroOrMore(value);
+            CheckUtil.ZeroOrMore(maxValue);
             if (value > maxValue) throw new ArgumentOutOfRangeException("現在HPが最大HPを超えています");
 
             Value = value;

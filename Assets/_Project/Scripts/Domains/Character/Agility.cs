@@ -18,7 +18,7 @@ namespace Domains
         /// <param name="value">素早さ</param>
         public Agility(int value)
         {
-            CheckArgument.ZeroOrMore(value);
+            CheckUtil.ZeroOrMore(value);
 
             Value = value;
         }
