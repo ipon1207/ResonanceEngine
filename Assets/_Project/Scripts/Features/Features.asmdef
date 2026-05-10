@@ -1,0 +1,20 @@
+{
+    "name": "Features",
+    "rootNamespace": "Features",
+    "references": [
+        "Core",
+        "Domains",
+        "VContainer",
+        "UniTask",
+        "R3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
