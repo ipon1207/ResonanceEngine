@@ -212,6 +212,12 @@
       "dependencies": {},
       "hash": "177dbda557fd652ce7f5d1647a3621653e094373"
     },
+    "nuget-packages": {
+      "version": "file:nuget-packages",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
