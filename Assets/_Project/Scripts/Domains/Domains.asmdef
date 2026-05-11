@@ -3,7 +3,7 @@
     "rootNamespace": "Domains",
     "references": [
         "Core",
-        "R3"
+        "R3.Unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
