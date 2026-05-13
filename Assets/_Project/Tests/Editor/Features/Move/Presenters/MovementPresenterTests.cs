@@ -17,6 +17,10 @@ namespace Tests.Editor.Features.Move.Presenters
             var viewMock = Substitute.For<IMovementView>();
             var inputSubject = new Subject<Vector2>();
 
+            // ModelのCurrentPositionがnullを返さないようにモックを設定
+            var positionProperty = new ReactiveProperty<Vector2>(Vector2.zero);
+            modelMock.CurrentPosition.Returns(positionProperty);
+
             // ViewのOnMoveInputがSubjectを返すように設定
             viewMock.OnMoveInput.Returns(inputSubject);
             

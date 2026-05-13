@@ -1,5 +1,6 @@
 using R3;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Features.Move.Views
 {
@@ -14,6 +15,7 @@ namespace Features.Move.Views
     public class PlayerMovementView : MonoBehaviour, IMovementView
     {
         private CharacterController _characterController;
+        private CharacterController Controller => _characterController != null ? _characterController : (_characterController = GetComponent<CharacterController>());
         private readonly Subject<Vector2> _onMoveInput = new();
 
         public Observable<Vector2> OnMoveInput => _onMoveInput;
@@ -25,8 +27,17 @@ namespace Features.Move.Views
 
         private void Update()
         {
-            float x = Input.GetAxisRaw("Horizontal");
-            float y = Input.GetAxisRaw("Vertical");
+            float x = 0f;
+            float y = 0f;
+
+            if (Keyboard.current != null)
+            {
+                if (Keyboard.current.dKey.isPressed) x += 1f;
+                if (Keyboard.current.aKey.isPressed) x -= 1f;
+                if (Keyboard.current.wKey.isPressed) y += 1f;
+                if (Keyboard.current.sKey.isPressed) y -= 1f;
+            }
+
             _onMoveInput.OnNext(new Vector2(x, y));
         }
 
@@ -38,7 +49,7 @@ namespace Features.Move.Views
             var delta = idealPosition3D - transform.position;
             // CharacterControllerを使って移動
             // （壁に当たれば自動でスライド）
-            _characterController.Move(delta);
+            Controller.Move(delta);
         }
 
         public Vector2 GetActualPosition()

@@ -27,6 +27,9 @@ namespace Features.Move.Presenters
 
         public void Initialize()
         {
+            // Subscribeを開始する前に、Scene上の実際に初期座標をModelに同期させる
+            _model.SetPosition(_view.GetActualPosition());
+
             // Viewからの入力を監視して最新の入力を保持
             _view.OnMoveInput
                 .Subscribe(Input => _currentInput = Input)
