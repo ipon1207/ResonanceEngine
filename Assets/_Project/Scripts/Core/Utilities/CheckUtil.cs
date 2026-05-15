@@ -34,5 +34,15 @@ namespace Core.Utilities
         {
             if (arg < 0) throw new ArgumentOutOfRangeException("引数が0.0未満です");
         }
+
+        /// <summary>
+        /// 引数の値が正であることを確認
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static void IsPositive(int arg)
+        {
+            if (arg <= 0) throw new ArgumentOutOfRangeException("引数が0以下です");
+        }
     }
 }
