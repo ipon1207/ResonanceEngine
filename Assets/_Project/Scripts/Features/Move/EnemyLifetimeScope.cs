@@ -13,6 +13,8 @@ namespace Features.Move
     public class EnemyLifetimeScope : LifetimeScope
     {
         [SerializeField]
+        private string _enemyId = "enemy_001";
+        [SerializeField]
         private EnemyView _enemyView;
         [SerializeField]
         private float _speed = 3f;
@@ -34,7 +36,7 @@ namespace Features.Move
 
             // PatrolModelの登録
             builder.Register<IEnemyPatrolModel>(resolver =>
-               new EnemyPatrolModel(validWaypoints, new Speed(_speed), initialPos),
+               new EnemyPatrolModel(new EnemyId(_enemyId), validWaypoints, new Speed(_speed), initialPos),
                 Lifetime.Scoped);
 
             // EncounterModelの登録

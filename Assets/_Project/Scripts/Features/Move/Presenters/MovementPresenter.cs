@@ -1,5 +1,6 @@
 using Core.Utilities;
 using Domains.Character;
+using Domains.Session;
 using Features.Move.Views;
 using R3;
 using System;
@@ -12,23 +13,35 @@ namespace Features.Move.Presenters
     {
         private readonly IMovementModel _model;
         private readonly IMovementView _view;
+        private readonly IGameSessionModel _sessionModel;
         private readonly CompositeDisposable _disposables = new();
 
         private Vector2 _currentInput;
 
-        public MovementPresenter(IMovementModel model, IMovementView view)
+        public MovementPresenter(IMovementModel model, IMovementView view, IGameSessionModel sessionModel)
         {
             CheckUtil.ArgNotNull(model);
             CheckUtil.ArgNotNull(view);
+            CheckUtil.ArgNotNull(sessionModel);
 
             _model = model;
             _view = view;
+            _sessionModel = sessionModel;
         }
 
         public void Initialize()
         {
-            // Subscribeを開始する前に、Scene上の実際に初期座標をModelに同期させる
-            _model.SetPosition(_view.GetActualPosition());
+            // セッションに保存された座標があれば復元し、なければ現在のViewの座標を使用する
+            if (_sessionModel.HasSavedPosition)
+            {
+                _model.SetPosition(_sessionModel.SavedPlayerPosition);
+                // Modelの座標を強制的にViewに反映させてワープさせる
+                _view.ApplyMovement(_sessionModel.SavedPlayerPosition);
+            }
+            else
+            {
+                _model.SetPosition(_view.GetActualPosition());
+            }
 
             // Viewからの入力を監視して最新の入力を保持
             _view.OnMoveInput

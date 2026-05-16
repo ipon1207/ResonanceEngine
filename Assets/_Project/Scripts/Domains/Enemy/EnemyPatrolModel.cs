@@ -8,6 +8,7 @@ namespace Domains.Enemy
 {
     public interface IEnemyPatrolModel
     {
+        EnemyId Id { get; }
         ReadOnlyReactiveProperty<Vector2> CurrentPosition { get; }
         void Tick(float deltaTime);
         void Stop();
@@ -25,6 +26,7 @@ namespace Domains.Enemy
     /// </summary>
     public class EnemyPatrolModel : IEnemyPatrolModel
     {
+        public EnemyId Id { get; }
         private readonly IReadOnlyList<Vector2> _waypoints;
         private readonly Speed _speed;
         private ReactiveProperty<Vector2> _currentPosition;
@@ -35,11 +37,12 @@ namespace Domains.Enemy
 
         public ReadOnlyReactiveProperty<Vector2> CurrentPosition => _currentPosition;
 
-        public EnemyPatrolModel(IReadOnlyList<Vector2> waypoints, Speed speed, Vector2 initialPosition = default)
+        public EnemyPatrolModel(EnemyId id, IReadOnlyList<Vector2> waypoints, Speed speed, Vector2 initialPosition = default)
         {
             CheckUtil.ArgNotNull(waypoints);
             CheckUtil.IsPositive(waypoints.Count);
 
+            Id = id;
             _waypoints = waypoints;
             _speed = speed;
             _currentPosition = new ReactiveProperty<Vector2>(initialPosition);

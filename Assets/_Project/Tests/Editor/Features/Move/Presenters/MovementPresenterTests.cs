@@ -1,4 +1,5 @@
 using Domains.Character;
+using Domains.Session;
 using Features.Move.Presenters;
 using Features.Move.Views;
 using NSubstitute;
@@ -15,30 +16,54 @@ namespace Tests.Editor.Features.Move.Presenters
         {
             var modelMock = Substitute.For<IMovementModel>();
             var viewMock = Substitute.For<IMovementView>();
+            var sessionMock = Substitute.For<IGameSessionModel>();
             var inputSubject = new Subject<Vector2>();
 
-            // ModelのCurrentPositionがnullを返さないようにモックを設定
             var positionProperty = new ReactiveProperty<Vector2>(Vector2.zero);
             modelMock.CurrentPosition.Returns(positionProperty);
 
-            // ViewのOnMoveInputがSubjectを返すように設定
             viewMock.OnMoveInput.Returns(inputSubject);
             
-            // Viewから返される補正後の実座標（衝突スライド後）を定義
             var correctPosition = new Vector2(1.5f, 2.5f);
             viewMock.GetActualPosition().Returns(correctPosition);
 
-            var presenter = new MovementPresenter(modelMock, viewMock);
+            // セッションに保存データがない状態
+            sessionMock.HasSavedPosition.Returns(false);
+
+            var presenter = new MovementPresenter(modelMock, viewMock, sessionMock);
             presenter.Initialize();
 
-            // Tick（毎フレーム処理）を呼ぶ
-            inputSubject.OnNext(new Vector2(0, 1)); // 前進入力
+            inputSubject.OnNext(new Vector2(0, 1));
             presenter.Tick();
 
-            // Modelに入力が渡されたか
-            modelMock.Received().Move(Arg.Any <Vector2>(), Arg.Any<float>());
-            // 衝突後の実座標がModelに書き戻されたか
+            modelMock.Received().Move(Arg.Any<Vector2>(), Arg.Any<float>());
             modelMock.Received().SetPosition(correctPosition);
+
+            presenter.Dispose();
+        }
+
+        [Test]
+        public void Initialize_WithSavedPosition_SetsModelAndAppliesMovement()
+        {
+            var modelMock = Substitute.For<IMovementModel>();
+            var viewMock = Substitute.For<IMovementView>();
+            var sessionMock = Substitute.For<IGameSessionModel>();
+            var inputSubject = new Subject<Vector2>();
+
+            var positionProperty = new ReactiveProperty<Vector2>(Vector2.zero);
+            modelMock.CurrentPosition.Returns(positionProperty);
+            viewMock.OnMoveInput.Returns(inputSubject);
+
+            var savedPosition = new Vector2(10f, 20f);
+            sessionMock.HasSavedPosition.Returns(true);
+            sessionMock.SavedPlayerPosition.Returns(savedPosition);
+
+            var presenter = new MovementPresenter(modelMock, viewMock, sessionMock);
+            presenter.Initialize();
+
+            // 初期化時に保存された座標が復元されていること
+            modelMock.Received().SetPosition(savedPosition);
+            viewMock.Received().ApplyMovement(savedPosition);
 
             presenter.Dispose();
         }

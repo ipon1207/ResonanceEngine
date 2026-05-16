@@ -6,6 +6,7 @@ namespace Features.Move.Views
     {
         void ApplyMovement(Vector2 idealPosition);
         Vector2 GetActualPosition();
+        void Hide();
     }
 
     /// <summary>
@@ -23,6 +24,11 @@ namespace Features.Move.Views
         public Vector2 GetActualPosition()
         {
             return new Vector2(transform.position.x, transform.position.z);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

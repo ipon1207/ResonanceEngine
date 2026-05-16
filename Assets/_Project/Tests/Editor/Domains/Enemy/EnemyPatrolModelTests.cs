@@ -15,7 +15,7 @@ namespace Tests.Editor.Domains.Enemy
         public void Tick_MovesTowardsFirstWaypoint()
         {
             var waypoint = new List<Vector2> { new(0, 0), new(10, 0) };
-            var model = new EnemyPatrolModel(waypoint, new Speed(5f), Vector2.zero);
+            var model = new EnemyPatrolModel(new EnemyId("test"), waypoint, new Speed(5f), Vector2.zero);
 
             model.Tick(1.0f);
 
@@ -28,7 +28,7 @@ namespace Tests.Editor.Domains.Enemy
         public void Tick_ReachedWaypoint_SwitchesToNext()
         {
             var waypoint = new List<Vector2> { new(0, 0), new(5, 0), new(5, 5) };
-            var model = new EnemyPatrolModel(waypoint, new Speed(5f), Vector2.zero);
+            var model = new EnemyPatrolModel(new EnemyId("test"), waypoint, new Speed(5f), Vector2.zero);
 
             model.Tick(1.0f);
             model.Tick(1.0f);
@@ -43,7 +43,7 @@ namespace Tests.Editor.Domains.Enemy
         {
             var waypoints = new List<Vector2> { new(0, 0), new(10, 0) };
             // 初期設計通り、1秒で10f進み、即座に(10,0)に到達させるために速度を10fに修正
-            var model = new EnemyPatrolModel(waypoints, new Speed(10f), Vector2.zero);
+            var model = new EnemyPatrolModel(new EnemyId("test"), waypoints, new Speed(10f), Vector2.zero);
 
             model.Tick(1.0f);
             model.Tick(0.5f);
@@ -56,7 +56,7 @@ namespace Tests.Editor.Domains.Enemy
         public void Stop_PreventFurtherMovement()
         {
             var waypoints = new List<Vector2> { new(0, 0), new(10, 0) };
-            var model = new EnemyPatrolModel(waypoints, new Speed(5f));
+            var model = new EnemyPatrolModel(new EnemyId("test"), waypoints, new Speed(5f));
             var posBeforeStop = model.CurrentPosition.CurrentValue;
 
             model.Stop();
