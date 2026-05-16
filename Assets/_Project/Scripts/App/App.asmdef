@@ -1,0 +1,19 @@
+{
+    "name": "App",
+    "rootNamespace": "App",
+    "references": [
+        "Core",
+        "Domains",
+        "Features",
+        "VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
