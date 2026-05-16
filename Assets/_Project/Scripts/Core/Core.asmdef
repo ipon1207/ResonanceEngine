@@ -1,7 +1,9 @@
 {
     "name": "Core",
     "rootNamespace": "Core",
-    "references": [],
+    "references": [
+        "VContainer"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
