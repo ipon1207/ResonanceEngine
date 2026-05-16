@@ -97,6 +97,10 @@ namespace Tests.Editor.Features.Move.Presenters
             var testEnemyId = new EnemyId("enemy_01");
             patrolModel.Id.Returns(testEnemyId);
 
+            // NullReferenceExceptionを防ぐためにIsEncounteredのモックも設定しておく
+            var isEncounteredProp = new ReactiveProperty<bool>(false);
+            encounterModel.IsEncountered.Returns(isEncounteredProp);
+
             // 倒されている状態
             sessionModel.IsEnemyDefeated(testEnemyId).Returns(true);
 

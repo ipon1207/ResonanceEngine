@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.0111505">
+  <test-suite type="TestSuite" id="1048" name="ResonanceEngine" fullname="ResonanceEngine" runstate="Runnable" testcasecount="19" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.011151" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1027" name="Tests.Editor.dll" fullname="C:/Users/miyashita/projects/ResonanceEngine/Library/ScriptAssemblies/Tests.Editor.dll" runstate="Runnable" testcasecount="19" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.009558" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="13080" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1028" name="Tests" fullname="Tests" runstate="Runnable" testcasecount="19" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.008138" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1029" name="Editor" fullname="Tests.Editor" runstate="Runnable" testcasecount="19" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.006696" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1030" name="Features" fullname="Tests.Editor.Features" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.005459" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestSuite" id="1031" name="Move" fullname="Tests.Editor.Features.Move" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.004186" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestSuite" id="1032" name="Presenters" fullname="Tests.Editor.Features.Move.Presenters" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.003030" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-suite type="TestFixture" id="1001" name="EnemyPresenterTests" fullname="Tests.Editor.Features.Move.Presenters.EnemyPresenterTests" classname="Tests.Editor.Features.Move.Presenters.EnemyPresenterTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.001771" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[One or more child tests had errors]]></message>
+                  </failure>
+                  <test-case id="1004" name="Initialize_WhenEnemyIsDefeated_HidesViewAndDoesNotSubscribe" fullname="Tests.Editor.Features.Move.Presenters.EnemyPresenterTests.Initialize_WhenEnemyIsDefeated_HidesViewAndDoesNotSubscribe" methodname="Initialize_WhenEnemyIsDefeated_HidesViewAndDoesNotSubscribe" classname="Tests.Editor.Features.Move.Presenters.EnemyPresenterTests" runstate="Runnable" seed="62221020" result="Failed" label="Error" start-time="2026-05-16 09:40:57Z" end-time="2026-05-16 09:40:57Z" duration="0.000387" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <failure>
+                      <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                      <stack-trace><![CDATA[  at Features.Move.Presenters.EnemyPresenter.Tick () [0x00000] in C:\Users\miyashita\projects\ResonanceEngine\Assets\_Project\Scripts\Features\Move\Presenters\EnemyPresenter.cs:82 
+  at Tests.Editor.Features.Move.Presenters.EnemyPresenterTests.Initialize_WhenEnemyIsDefeated_HidesViewAndDoesNotSubscribe () [0x00096] in C:\Users\miyashita\projects\ResonanceEngine\Assets\_Project\Tests\Editor\Features\Move\Presenters\EnemyPresenterTests.cs:110 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <f713e1c3c5f545ce9b1df47230f4f853>:0 ]]></stack-trace>
+                    </failure>
+                    <output><![CDATA[Saving results to: C:/Users/miyashita/AppData/LocalLow/DefaultCompany/ResonanceEngine\TestResults.xml
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

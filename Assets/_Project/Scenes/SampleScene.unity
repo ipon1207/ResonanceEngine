@@ -885,6 +885,7 @@ MonoBehaviour:
     TypeName: Features.Move.MoveLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
+  _enemyId: enemy_001
   _enemyView: {fileID: 1396906534}
   _speed: 3
   _encounterRadius: 1.5
