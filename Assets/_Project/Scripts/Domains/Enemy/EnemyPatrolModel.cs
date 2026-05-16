@@ -23,7 +23,7 @@ namespace Domains.Enemy
     /// 敵の巡回ロジックを管理するModel
     /// Ping-Pong移動
     /// </summary>
-    public class EnemyPatrolModel
+    public class EnemyPatrolModel : IEnemyPatrolModel
     {
         private readonly IReadOnlyList<Vector2> _waypoints;
         private readonly Speed _speed;
