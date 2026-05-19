@@ -1,3 +1,4 @@
+using Features.Battle.Models;
 using Features.Battle.Presenters;
 using Features.Battle.Views;
 using UnityEngine;
@@ -8,16 +9,24 @@ namespace Features.Battle
 {
     public class BattleLifetimeScope : LifetimeScope
     {
-        [SerializeField]
-        private BattleView _battleView;
+        [SerializeField] private BattleCommandView _commandView;
+        [SerializeField] private VictoryResultView _victoryView;
+        [SerializeField] private GameOverView _gameOverView;
+
         protected override void Configure(IContainerBuilder builder)
         {
-            // Viewの登録
-            builder.RegisterComponent<IBattleView>(_battleView);
+            // Model
+            builder.Register<IBattleStateModel, BattleStateModel>(Lifetime.Scoped);
 
-            // Presenterの登録
-            // ISceneTransitionServiceは、RootLifetimeScopeから自動で注入される
-            builder.RegisterEntryPoint<BattlePresenter>(Lifetime.Scoped);
+            // Views
+            builder.RegisterComponent<IBattleCommandView>(_commandView);
+            builder.RegisterComponent<IVictoryResultView>(_victoryView);
+            builder.RegisterComponent<IGameOverView>(_gameOverView);
+
+            // Presenters
+            // IGameSessionModelとISceneTransitionServiceはRootLifetimeScopeから自動注入される
+            builder.RegisterEntryPoint<BattleCommandPresenter>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<BattleResultPresenter>(Lifetime.Scoped);
         }
     }
 }
