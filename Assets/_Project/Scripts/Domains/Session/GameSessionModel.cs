@@ -28,5 +28,11 @@ namespace Domains.Session
         {
             return _defeatedEnemies.Contains(enemyId);
         }
+
+        public void ClearSavedPosition()
+        {
+            HasSavedPosition = false;
+            SavedPlayerPosition = Vector2.zero;
+        }
     }
 }

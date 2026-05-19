@@ -19,5 +19,8 @@ namespace Domains.Session
 
         /// <summary>指定した敵が撃破済みかどうかを判定する</summary>
         bool IsEnemyDefeated(EnemyId enemyId);
+
+        /// <summary>保存されたプレイヤー座標を破棄し、初期位置からの再開を促す</summary>
+        void ClearSavedPosition();
     }
 }
