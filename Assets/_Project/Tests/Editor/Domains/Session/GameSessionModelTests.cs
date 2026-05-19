@@ -77,5 +77,24 @@ namespace Tests.Editor.Domains.Session
             Assert.IsTrue(_sessionModel.IsEnemyDefeated(enemyId2));
             Assert.IsFalse(_sessionModel.IsEnemyDefeated(enemyId3));
         }
+
+        [Test]
+        public void ClearSavedPosition_WhenPositionIsSaved_ClearsDataAndFlag()
+        {
+            // Arrange
+            var testPosition = new Vector2(5f, 10f);
+            _sessionModel.SavePlayerPosition(testPosition);
+
+            // 事前確認（保存されていること）
+            Assert.IsTrue(_sessionModel.HasSavedPosition);
+
+            // Act
+            _sessionModel.ClearSavedPosition();
+
+            // Assert
+            // フラグがFalseになり、座標が(0,0)などの初期値にリセットされていることを検証
+            Assert.IsFalse(_sessionModel.HasSavedPosition);
+            Assert.AreEqual(Vector2.zero, _sessionModel.SavedPlayerPosition);
+        }
     }
 }
