@@ -1,3 +1,4 @@
+using Domains.Enemy;
 using Domains.Session;
 using Features.Battle.Models;
 using Features.Battle.Presenters;
@@ -34,7 +35,7 @@ namespace Tests.Editor.Features.Battle.Presenters
         }
 
         [Test]
-        public void Initialize_WhenStateChanges_ShowsCorrectView()
+        public void Initialize_WhenStateChangesToVictory_RecordsDefeatedEnemy_And_ShowsCorrectView()
         {
             var stateModel = Substitute.For<IBattleStateModel>();
             var victoryView = Substitute.For<IVictoryResultView>();
@@ -46,15 +47,20 @@ namespace Tests.Editor.Features.Battle.Presenters
             stateModel.CurrentState.Returns(stateProp);
             victoryView.OnReturnButtonClicked.Returns(new Subject<Unit>());
             gameOverView.OnReturnButtonClicked.Returns(new Subject<Unit>());
+            
+            // テスト用にエンカウントした敵のIDをセット
+            var testEnemyId = new EnemyId("enemy_001");
+            sessionModel.CurrentEncounterEnemyId.Returns(testEnemyId);
 
             var presenter = new BattleResultPresenter(stateModel, victoryView, gameOverView, sessionModel, transitionService);
             presenter.Initialize();
 
+            // Act
             stateProp.Value = BattleState.VictoryResult;
-            victoryView.Received(1).Show();
 
-            stateProp.Value = BattleState.GameOver;
-            gameOverView.Received(1).Show();
+            // Assert
+            victoryView.Received(1).Show();
+            sessionModel.Received(1).RecordDefeatedEnemy(testEnemyId);
 
             presenter.Dispose();
         }
@@ -81,13 +87,13 @@ namespace Tests.Editor.Features.Battle.Presenters
             victoryReturnSubject.OnNext(Unit.Default);
 
             transitionService.Received(1).LoadMapScene();
-            sessionModel.DidNotReceive().ClearSavedPosition();
+            sessionModel.DidNotReceive().ClearSessionData();
 
             presenter.Dispose();
         }
 
         [Test]
-        public void GameOverReturnClicked_ClearsSavedPosition_And_CallsLoadMapScene()
+        public void GameOverReturnClicked_ClearsSessionData_And_CallsLoadMapScene()
         {
             var stateModel = Substitute.For<IBattleStateModel>();
             var victoryView = Substitute.For<IVictoryResultView>();
@@ -107,7 +113,7 @@ namespace Tests.Editor.Features.Battle.Presenters
 
             gameOverReturnSubject.OnNext(Unit.Default);
 
-            sessionModel.Received(1).ClearSavedPosition();
+            sessionModel.Received(1).ClearSessionData();
             transitionService.Received(1).LoadMapScene();
 
             presenter.Dispose();
