@@ -47,7 +47,15 @@ namespace Features.Battle.Presenters
             _stateModel.CurrentState
                 .Subscribe(state =>
                 {
-                    if (state == BattleState.VictoryResult) _victoryView.Show();
+                    if (state == BattleState.VictoryResult)
+                    {
+                        // 勝利が決まったタイミングで、一時保存していた敵IDを正式に撃破済みリストへ追加
+                        if (_sessionModel.CurrentEncounterEnemyId.HasValue)
+                        {
+                            _sessionModel.RecordDefeatedEnemy(_sessionModel.CurrentEncounterEnemyId.Value);
+                        }
+                        _victoryView.Show();
+                    }
                     if (state == BattleState.GameOver) _gameOverView.Show();
                 })
                 .AddTo(_disposables);
@@ -61,7 +69,7 @@ namespace Features.Battle.Presenters
             _gameOverView.OnReturnButtonClicked
                 .Subscribe(_ =>
                 {
-                    _sessionModel.ClearSavedPosition();
+                    _sessionModel.ClearSessionData();
                     _transitionService.LoadMapScene();
                 })
                 .AddTo(_disposables);

@@ -11,11 +11,17 @@ namespace Domains.Session
 
         public bool HasSavedPosition { get; private set; } = false;
         public Vector2 SavedPlayerPosition { get; private set; } = Vector2.zero;
+        public EnemyId? CurrentEncounterEnemyId { get; private set; } = null;
 
         public void SavePlayerPosition(Vector2 position)
         {
             SavedPlayerPosition = position;
             HasSavedPosition = true;
+        }
+
+        public void SetCurrentEncounter(EnemyId enemyId)
+        {
+            CurrentEncounterEnemyId = enemyId;
         }
 
         public void RecordDefeatedEnemy(EnemyId enemyId)
@@ -29,10 +35,11 @@ namespace Domains.Session
             return _defeatedEnemies.Contains(enemyId);
         }
 
-        public void ClearSavedPosition()
+        public void ClearSessionData()
         {
             HasSavedPosition = false;
             SavedPlayerPosition = Vector2.zero;
+            CurrentEncounterEnemyId = null;
         }
     }
 }

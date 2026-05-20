@@ -79,22 +79,27 @@ namespace Tests.Editor.Domains.Session
         }
 
         [Test]
-        public void ClearSavedPosition_WhenPositionIsSaved_ClearsDataAndFlag()
+        public void ClearSessionData_WhenPositionIsSaved_ClearsDataAndFlag()
         {
             // Arrange
             var testPosition = new Vector2(5f, 10f);
+            var testEnemyId = new EnemyId("test_enemy");
+            
             _sessionModel.SavePlayerPosition(testPosition);
+            _sessionModel.SetCurrentEncounter(testEnemyId);
 
             // 事前確認（保存されていること）
             Assert.IsTrue(_sessionModel.HasSavedPosition);
+            Assert.AreEqual(testEnemyId, _sessionModel.CurrentEncounterEnemyId);
 
             // Act
-            _sessionModel.ClearSavedPosition();
+            _sessionModel.ClearSessionData();
 
             // Assert
-            // フラグがFalseになり、座標が(0,0)などの初期値にリセットされていることを検証
+            // フラグがFalseになり、座標が初期値に、一時IDがnullにリセットされていることを検証
             Assert.IsFalse(_sessionModel.HasSavedPosition);
             Assert.AreEqual(Vector2.zero, _sessionModel.SavedPlayerPosition);
+            Assert.IsFalse(_sessionModel.CurrentEncounterEnemyId.HasValue);
         }
     }
 }

@@ -78,7 +78,7 @@ namespace Tests.Editor.Features.Move.Presenters
 
             patrolModel.Received().Stop();
             sessionModel.Received().SavePlayerPosition(testPlayerPos);
-            sessionModel.Received().RecordDefeatedEnemy(testEnemyId);
+            sessionModel.Received().SetCurrentEncounter(testEnemyId);
             transitionService.Received().LoadBattleScene();
 
             presenter.Dispose();

@@ -67,8 +67,8 @@ namespace Features.Move.Presenters
                     // 現在のプレイヤー座標を保存
                     _sessionModel.SavePlayerPosition(_playerModel.CurrentPosition.CurrentValue);
                     
-                    // 自身を撃破済みとして記録
-                    _sessionModel.RecordDefeatedEnemy(_patrolModel.Id);
+                    // 今から戦う敵のIDを一時保存（まだ撃破リストには入れない）
+                    _sessionModel.SetCurrentEncounter(_patrolModel.Id);
 
                     Debug.Log("【Encounter!】バトルシーンへ遷移します...");
                     _transitionService.LoadBattleScene();
