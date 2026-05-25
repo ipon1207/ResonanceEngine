@@ -1,3 +1,4 @@
+using Domains.Battle;
 using NUnit.Framework;
 
 namespace Tests.Editor.Domains.Battle

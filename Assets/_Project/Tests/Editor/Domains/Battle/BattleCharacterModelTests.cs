@@ -1,3 +1,4 @@
+using Domains.Battle;
 using Domains.Character;
 using Domains.MasterData;
 using NSubstitute;
@@ -30,7 +31,7 @@ namespace Tests.Editor.Domains.Battle
 
             // Assert
             // 初期状態は0、Tick後は100になっているはず
-            Assert.AreEqual(100, model.CurrentGauge.Value.Value);
+            Assert.AreEqual(100, model.CurrentGauge.CurrentValue.Value);
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace Tests.Editor.Domains.Battle
             model.ApplyDamage(120);
 
             // Assert
-            Assert.AreEqual(0, model.CurrentHp.Value.Value);
+            Assert.AreEqual(0, model.CurrentHp.CurrentValue.Value);
         }
 
     }

@@ -1,3 +1,4 @@
+using Domains.Battle;
 using Domains.Character;
 using Domains.MasterData;
 using NSubstitute;
@@ -26,7 +27,7 @@ namespace Tests.Editor.Domains.Battle
 
             // Assert 1
             Assert.IsTrue(party.IsAnyCharacterReady);
-            Assert.IsTrue(hero1.CurrentGauge.Value.IsFull);
+            Assert.IsTrue(hero1.CurrentGauge.CurrentValue.IsFull);
 
             // Act 2: 満タンの状態でさらにTickを呼ぶ
             // 一旦hero2のゲージを0にリセットしたと仮定（直接リセットできなければ新しいモック構成などでテスト）
@@ -36,7 +37,7 @@ namespace Tests.Editor.Domains.Battle
             party.TickAllGauges(1.0f, calculatorMock);
 
             // Assert 2
-            Assert.AreEqual(0, hero2.CurrentGauge.Value.Value, "ウェイトモード中は他のキャラのゲージが増加してはいけない");
+            Assert.AreEqual(0, hero2.CurrentGauge.CurrentValue.Value, "ウェイトモード中は他のキャラのゲージが増加してはいけない");
         }
 
     }

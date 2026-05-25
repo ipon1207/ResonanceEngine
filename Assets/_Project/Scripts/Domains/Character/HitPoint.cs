@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Core.Utilities;
 
 namespace Domains
@@ -7,16 +7,18 @@ namespace Domains
     /// 現在のHP（ヒットポイント）と最大HPを管理する値オブジェクト
     /// </summary>
     /// <remarks>このクラスはHPの現在値と最大値を不変として保持します。HPの値は0以上かつ最大HP以下である必要がある</remarks>
-    public class HitPoint
+    public readonly struct HitPoint : IEquatable<HitPoint>
     {
         /// <summary>
         /// 現在HP
         /// </summary>
-        public int Value { get; private set; }
+        public int Value { get; }
         /// <summary>
         /// 最大HP
         /// </summary>
-        public int MaxValue { get; private set; }
+        public int MaxValue { get; }
+
+        public float Ratio => MaxValue == 0 ? 0 : (float)Value / MaxValue;
 
         /// <summary>
         /// 現在HPと最大HPを指定してHPを生成
@@ -33,5 +35,25 @@ namespace Domains
             Value = value;
             MaxValue = maxValue;
         }
+
+        public HitPoint Damage(int amount)
+        {
+            CheckUtil.ZeroOrMore(amount);
+            var nextValue = Math.Max(0, Value - amount);
+            return new HitPoint(nextValue, MaxValue);
+        }
+
+        public HitPoint Recover(int amount)
+        {
+            CheckUtil.ZeroOrMore(amount);
+            var nextValue = Math.Min(MaxValue, Value + amount);
+            return new HitPoint(nextValue, MaxValue);
+        }
+
+        public bool Equals(HitPoint other) => Value == other.Value && MaxValue == other.MaxValue;
+        public override bool Equals(object obj) => obj is HitPoint other && Equals(other);
+        public override int GetHashCode() => HashCode.Combine(Value, MaxValue);
+        public static bool operator ==(HitPoint left, HitPoint right) => left.Equals(right);
+        public static bool operator !=(HitPoint left, HitPoint right) => !left.Equals(right);
     }
 }

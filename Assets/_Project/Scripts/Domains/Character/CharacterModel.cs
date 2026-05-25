@@ -1,4 +1,4 @@
-﻿using Core.Utilities;
+using Core.Utilities;
 
 namespace Domains
 {
@@ -25,7 +25,7 @@ namespace Domains
         /// <param name="agi">素早さ</param>
         public CharacterModel(HitPoint hp, Strength str, Agility agi)
         {
-            CheckUtil.ArgNotNull(hp);
+
             CheckUtil.ArgNotNull(str);
             CheckUtil.ArgNotNull(agi);
 
