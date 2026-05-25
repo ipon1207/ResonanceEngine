@@ -17,13 +17,17 @@ namespace Features.Battle
         {
             // Model
             builder.Register<IBattleStateModel, BattleStateModel>(Lifetime.Scoped);
+            builder.Register<IActionGaugeCalculator, SimpleActionGaugeCalculator>(Lifetime.Scoped);
 
             // Views
             builder.RegisterComponent<IBattleCommandView>(_commandView);
             builder.RegisterComponent<IVictoryResultView>(_victoryView);
             builder.RegisterComponent<IGameOverView>(_gameOverView);
 
-            // Presenters
+            // Presenters (Battle UI用 Factory)
+            builder.Register<BattleCharacterPresenterFactory>(Lifetime.Scoped);
+
+            // Presenters (既存)
             // IGameSessionModelとISceneTransitionServiceはRootLifetimeScopeから自動注入される
             builder.RegisterEntryPoint<BattleCommandPresenter>(Lifetime.Scoped);
             builder.RegisterEntryPoint<BattleResultPresenter>(Lifetime.Scoped);
