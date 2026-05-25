@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd17d8fc120e2ee4a8a96c403c35231a, type: 3}
+  m_Name: CharacterMasterTable
+  m_EditorClassIdentifier: App::App.MasterData.CharacterMasterTable
+  _entries:
+  - Id: 1
+    DisplayName: ipon
+    MaxHp: 100
+    MaxSp: 100
+    Str: 50
+    Int: 50
+    Def: 50
+    Mnd: 50
+    Agi: 50
+    Luk: 50

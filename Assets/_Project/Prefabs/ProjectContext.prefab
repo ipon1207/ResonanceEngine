@@ -48,3 +48,5 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _characterMasterTable: {fileID: 11400000, guid: 2b8bf791b137a474ab89d00058363840, type: 2}
+  _enemyMasterTable: {fileID: 11400000, guid: 2c9b7ce76eaaeda4aa8b62a00174a615, type: 2}
