@@ -7,6 +7,7 @@
         "Core",
         "Domains",
         "Features",
+        "App",
         "UniTask",
         "R3.Unity"
     ],
