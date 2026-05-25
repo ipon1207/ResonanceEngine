@@ -1,6 +1,7 @@
 using Features.Battle.Models;
 using Features.Battle.Presenters;
 using Features.Battle.Views;
+using Domains.Battle;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
