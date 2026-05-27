@@ -30,7 +30,7 @@ namespace Tests.Editor.Domains.Battle
             model.TickGauge(1.0f, calculatorMock);
 
             // Assert
-            Assert.AreEqual(100, model.CurrentGauge.Value.Value);
+            Assert.AreEqual(100, model.CurrentGauge.CurrentValue.Value);
         }
     }
 }

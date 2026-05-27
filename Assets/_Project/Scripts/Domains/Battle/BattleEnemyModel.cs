@@ -6,9 +6,9 @@ using System;
 
 namespace Domains.Battle
 {
-    public class BattleCharacterModel : IBattleParticipant, IDisposable
+    public class BattleEnemyModel : IBattleParticipant, IDisposable
     {
-        public CharacterMasterData MasterData { get; }
+        public EnemyMasterData MasterData { get; }
 
         private readonly ReactiveProperty<HitPoint> _currentHp;
         public ReadOnlyReactiveProperty<HitPoint> CurrentHp => _currentHp;
@@ -18,14 +18,12 @@ namespace Domains.Battle
 
         public bool IsReady => _currentGauge.Value.IsFull;
 
-        public BattleCharacterModel(CharacterMasterData masterData)
+        public BattleEnemyModel(EnemyMasterData masterData)
         {
             CheckUtil.ArgNotNull(masterData);
             MasterData = masterData;
 
-            // 初期化: HPは最大、ゲージは0からスタート
             _currentHp = new ReactiveProperty<HitPoint>(new HitPoint(masterData.Stats.MaxHp, masterData.Stats.MaxHp));
-            // ゲージの最大値は仮に1000固定とする（将来的にマスター等から取得可能）
             _currentGauge = new ReactiveProperty<ActionGauge>(new ActionGauge(0, 1000));
         }
 
@@ -37,7 +35,7 @@ namespace Domains.Battle
 
         public void TickGauge(float deltaTime, IActionGaugeCalculator calculator)
         {
-            if (_currentGauge.Value.IsFull) return;
+            if (IsReady) return;
 
             int increment = calculator.CalculateIncrement(MasterData.Stats, deltaTime);
             _currentGauge.Value = _currentGauge.Value.Add(increment);

@@ -28,7 +28,7 @@ namespace Tests.Editor.Domains.Battle
 
             // Assert 1
             Assert.IsTrue(party.IsAnyEnemyReady);
-            Assert.IsTrue(enemy1.CurrentGauge.Value.IsFull);
+            Assert.IsTrue(enemy1.CurrentGauge.CurrentValue.IsFull);
 
             // Act 2: 満タンの状態で、片方のゲージをリセットしてからさらにTickを呼ぶ
             enemy2.ResetGauge();
@@ -37,7 +37,7 @@ namespace Tests.Editor.Domains.Battle
             party.TickAllGauges(1.0f, calculatorMock);
 
             // Assert 2
-            Assert.AreEqual(0, enemy2.CurrentGauge.Value.Value, "ウェイトモード中は他の敵キャラのゲージが増加してはいけない");
+            Assert.AreEqual(0, enemy2.CurrentGauge.CurrentValue.Value, "ウェイトモード中は他の敵キャラのゲージが増加してはいけない");
         }
     }
 }

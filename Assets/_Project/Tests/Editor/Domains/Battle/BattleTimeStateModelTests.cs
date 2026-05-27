@@ -1,15 +1,15 @@
-using Features.Battle.Models;
+using Domains.Battle;
 using NUnit.Framework;
 
 namespace Tests.Editor.Domains.Battle
 {
-    public class BattleStateModelTests
+    public class BattleTimeStateModelTests
     {
         [Test]
         public void InitialState_IsPaused_IsFalse()
         {
             // Arrange & Act
-            var stateModel = new BattleStateModel();
+            var stateModel = new BattleTimeStateModel();
 
             // Assert
             Assert.IsFalse(stateModel.IsPaused.CurrentValue);
@@ -19,7 +19,7 @@ namespace Tests.Editor.Domains.Battle
         public void SetPause_ChangesIsPausedState()
         {
             // Arrange
-            var stateModel = new BattleStateModel();
+            var stateModel = new BattleTimeStateModel();
 
             // Act
             stateModel.SetPause(true);
