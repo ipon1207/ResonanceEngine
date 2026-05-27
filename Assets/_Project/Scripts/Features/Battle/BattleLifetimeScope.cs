@@ -19,6 +19,9 @@ namespace Features.Battle
             // Model
             builder.Register<IBattleStateModel, BattleStateModel>(Lifetime.Scoped);
             builder.Register<IActionGaugeCalculator, SimpleActionGaugeCalculator>(Lifetime.Scoped);
+            builder.Register<BattleTimeStateModel>(Lifetime.Scoped);
+            builder.Register<BattlePartyModel>(Lifetime.Scoped);
+            builder.Register<BattleEnemyPartyModel>(Lifetime.Scoped);
 
             // Views
             builder.RegisterComponent<IBattleCommandView>(_commandView);
@@ -32,6 +35,7 @@ namespace Features.Battle
             // IGameSessionModelとISceneTransitionServiceはRootLifetimeScopeから自動注入される
             builder.RegisterEntryPoint<BattleCommandPresenter>(Lifetime.Scoped);
             builder.RegisterEntryPoint<BattleResultPresenter>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<BattleTimeLoopPresenter>(Lifetime.Scoped);
         }
     }
 }
